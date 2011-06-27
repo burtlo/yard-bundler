@@ -28,12 +28,12 @@
       <% end %>
       
       
-      <% if dep.issues and not dep.issues.empty? %>
+      <% if dep.issues and not dep.open_bugs.empty? %>
         <h4>Open Issues</h4>
         <% dep.open_bugs.each do |issue| %>
           <li class="issue">
-            <a href="<%= h issue.html_url %>"><%= h issue.title %></a>
             <span class="time"><%= h issue.updated_at %></span>
+            <a href="<%= h issue.html_url %>"><%= h issue.title %></a>
             <span class="tags">[<%= h issue.labels.join(', ') %>]</span>
           </li>
         <% end %>
@@ -43,7 +43,11 @@
       <% if dep.commits and not dep.commits.empty? %>
         <h4>Recent Commits</h4>
         <% dep.commits[0..4].each do |commit| %>
-        <li class="commit"><a href="http://github.com<%= commit.url %>"><%= h commit.message %></a></li>
+        <li class="commit">
+          <span class="time"><%= h commit.committed_date %></span>
+          <a href="http://github.com<%= commit.url %>"><%= h commit.message %></a>
+        </li>
+        
         <% end %>
       <% end %>
       

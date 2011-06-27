@@ -1,6 +1,6 @@
-ul.dependencies {
+#filecontents ul.dependencies {
     list-style: none; 
-    padding-left: 20px;
+    padding-left: 0px;
 }
 
 ul.dependencies li {
@@ -17,7 +17,6 @@ li.dependency {
     background: #e5e8ff; border: 1px solid #d8d8e5; -moz-border-radius: 3px; -webkit-border-radius: 3px;
     color: #3F3F3F;
     height: 20px;
-    clear: both;
 }
 
 
@@ -26,15 +25,18 @@ li.dependency h3 div.name {
 }
 
 li.dependency h3 div.version {
-    float: right;
+    float: left; padding-left: 10px;
 }
 
 div.details { }
 
 div.details ul li.documentation { padding-top: 10px; }
 div.details ul li.project {}
-li.issue { margin-left: 15px; }
-
+    
+li.issue { margin-left: 15px; list-style-type: square; }
 li.issue span.time { font-size: 10px; }
 li.issue span.tags { font-size: 10px; text-transform:uppercase; }
-li.commit { margin-left: 15px; }
+
+li.commit { margin-left: 15px; list-style-type: square; }
+li.commit span.time { font-size: 10px; }
+li.commit span.tags { font-size: 10px; text-transform:uppercase; }
