@@ -1,0 +1,11 @@
+source :rubygems
+
+gem 'rest-client'
+gem 'json'
+gem 'addressable'
+
+group :test do
+  gem 'rspec'
+  gem 'guard'
+  gem 'guard-rspec'
+end

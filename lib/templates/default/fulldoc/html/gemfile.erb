@@ -1,0 +1,55 @@
+
+<h1>Gemfile</h1>
+
+<h2>Dependencies</h2>
+<div>
+  Provided below is a list of the files defined in the Gemfile and Gemfile.lock.
+  All of the dependencies and sub-dependencies are shown here with links to their
+  documentation and if it the project is hosted on Github additional links are 
+  included to the project, issues, and recent commits.
+</div>
+
+<ul class="dependencies">
+<% dependencies.each do |dep| %>
+  <li class="dependency">
+    <h3>
+      <div class="name"><%= h dep.name %></div>
+      <div class="version">(<a href="<%= h dep.rubygems_version_url %>"><%= h dep.version %></a>)</div>
+    </h3>
+    <br/ style="clear:both;">
+  </li>
+  <li class="details">
+    <div class="details">
+      <ul style="list-style: none;">
+      <li class="documentation"><a href="<%= h dep.documentation_url %>">Documentation</a></li>
+      
+      <% if dep.project_url and not dep.project_url == "" %>
+        <li class="project"><a href="<%= h dep.project_url %>">Project</a></li>
+      <% end %>
+      
+      
+      <% if dep.issues and not dep.issues.empty? %>
+        <h4>Open Issues</h4>
+        <% dep.open_bugs.each do |issue| %>
+          <li class="issue">
+            <a href="<%= h issue.html_url %>"><%= h issue.title %></a>
+            <span class="time"><%= h issue.updated_at %></span>
+            <span class="tags">[<%= h issue.labels.join(', ') %>]</span>
+          </li>
+        <% end %>
+        
+      <% end %>
+      
+      <% if dep.commits and not dep.commits.empty? %>
+        <h4>Recent Commits</h4>
+        <% dep.commits[0..4].each do |commit| %>
+        <li class="commit"><a href="http://github.com<%= commit.url %>"><%= h commit.message %></a></li>
+        <% end %>
+      <% end %>
+      
+    </ul></div>
+  </li>
+  
+<% end %>
+</ul>
+<br/ style="clear:both;">

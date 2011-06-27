@@ -1,0 +1,40 @@
+ul.dependencies {
+    list-style: none; 
+    padding-left: 20px;
+}
+
+ul.dependencies li {
+    padding-top: 10px;
+}
+
+ul.dependencies li.dependency h3 {
+    font-weight: bold; font-family: Monaco, Consolas, Courier, monospace;
+    margin-top: 0px;
+}
+
+li.dependency {
+    padding: 6px 10px; margin-top: 18px;
+    background: #e5e8ff; border: 1px solid #d8d8e5; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+    color: #3F3F3F;
+    height: 20px;
+    clear: both;
+}
+
+
+li.dependency h3 div.name {
+    float: left;
+}
+
+li.dependency h3 div.version {
+    float: right;
+}
+
+div.details { }
+
+div.details ul li.documentation { padding-top: 10px; }
+div.details ul li.project {}
+li.issue { margin-left: 15px; }
+
+li.issue span.time { font-size: 10px; }
+li.issue span.tags { font-size: 10px; text-transform:uppercase; }
+li.commit { margin-left: 15px; }
