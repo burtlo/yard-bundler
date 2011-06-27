@@ -2,20 +2,32 @@ YARD-Bundler: A YARD extension for Bundler
 =========================================
 
 NOTE: This extension is currently under development. At the current moment,
-the plugin is not particularly useful for any individual. Please feel free to 
-clone and take a look around.
-
-Currently the project is still in requirements gathering phase.
-
-I would love ideas, thoughts, and mock ups of visualization and presentation of
-the data and how you would be see the gem serving you.
-
+the plugin is not fully featured or compliant with all of Bundler and Gemfile features. 
+However, please feel free to fork the project and take a look around.
 
 Synopsis
 --------
 
 YARD-Bundler is a YARD extension that processes Bundler Gemfile and Gemfile.lock 
 files and includes them in the documentation output.
+
+Features (Example)
+--------
+
+Take a look at [example output](http://recursivegames.com/yard-bundler/file.Gemfile.html) 
+generated with the yard-bundler plugin.
+
+**1. Gemfile.lock and Gemfile are parsed and [included in your file list](http://recursivegames.com/yard-bundler/file_list.html).
+
+**2. Gemfile formatted with all dependencies shown in a [TOC](http://recursivegames.com/yard-bundler/file.Gemfile.html).
+ 
+**3. Gem description contains direct links to [documentation](http://rubydoc.info) and [rubygem's description](http://rubygems.org)
+
+**4. Gems with Github projects will have a direct link to Github.
+
+**5. Gems on Github with issues that are 'open' and marked as 'bug' will appear
+
+**6. Gems on Github will show that last commits to the gem
 
 
 Installation
@@ -50,7 +62,7 @@ An example with the rake task:
     require 'yard'
 
     YARD::Rake::YardocTask.new do |t|
-      t.files   = ['lib/**/*.rb' 'Gemfile', 'Gemfile.lock']
+      t.files   = ['lib/**/*.rb' 'Gemfile.lock']
       t.options = ['--debug'] # optional arguments
     end
 

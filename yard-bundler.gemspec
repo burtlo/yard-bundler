@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
 
   s.platform    = Gem::Platform::RUBY
   
-  changes = BundlerInTheYARD.show_version_changes(::RSpecInTheYARD::VERSION)
+  changes = BundlerInTheYARD.show_version_changes(::BundlerInTheYARD::VERSION)
   
   s.post_install_message = %{
 (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##)
