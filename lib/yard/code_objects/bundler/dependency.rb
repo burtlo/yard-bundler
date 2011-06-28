@@ -9,6 +9,11 @@ module YARD::CodeObjects
       
       attr_accessor :version
       
+      #
+      # All the versions found on Rubygems for the gem
+      # 
+      attr_accessor :versions
+      
       # 
       # For the dependency generate the link to the documentation.
       # @return [String] url to the docs on Rubydoc

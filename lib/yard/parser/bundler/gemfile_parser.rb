@@ -72,8 +72,8 @@ module YARD::Parser::Bundler
       dependency = YARD::CodeObjects::Bundler::Dependency.new(YARD::CodeObjects::Bundler::BUNDLER_NAMESPACE,gem_name)
       dependency.version = gem_version
       
-      json = ""
-      mash = nil
+      gemspec_mash = nil
+      versions_mash = nil
       
       # Rubygems API does not have a way to ask for detailed information about
       # a particular version of a gem so you have to grab the latest.
@@ -83,10 +83,16 @@ module YARD::Parser::Bundler
         # curl http://rubygems.org/api/v1/gems/rails.json
         open "http://rubygems.org/api/v1/gems/#{gem_name}.json" do |response|
           json = JSON.parse(response.read)
-          mash = Hashie::Mash.new json
+          gemspec_mash = Hashie::Mash.new json
         end
-      rescue
-        log.error "could not load the rubygems information for #{gem_name}"
+        
+        open "http://rubygems.org/api/v1/versions/#{gem_name}.json" do |response|
+          json = JSON.parse(response.read)
+          versions_mash = json.map {|version| Hashie::Mash.new version }
+        end
+        
+      rescue => exception
+        log.error "could not load the rubygems information for #{gem_name} => #{exception}"
       end
       
       # project_uri
@@ -94,10 +100,10 @@ module YARD::Parser::Bundler
       
       # TODO: check for github gem being installed
       
-      if mash and user_repo = mash.source_code_uri.to_s[/^http:\/\/github.com\/(.+)/,1]
+      if gemspec_mash and user_repo = gemspec_mash.source_code_uri.to_s[/^http:\/\/github.com\/(.+)/,1]
         
-        log.debug "Setting Project URL: #{mash.source_code_uri}"
-        dependency.project_url = mash.source_code_uri
+        log.debug "Setting Project URL: #{gemspec_mash.source_code_uri}"
+        dependency.project_url = gemspec_mash.source_code_uri
         
         log.debug "Loading Github Repo: #{user_repo}"
         github_repo = Octokit.repo(user_repo)
@@ -111,6 +117,8 @@ module YARD::Parser::Bundler
         dependency.commits = Octokit.commits(user_repo)
         
       end
+      
+      dependency.versions = versions_mash
       
       # stackoverflow - last few tagged topics that match the gem
       # TODO: change to use search text and perhaps not just tags
