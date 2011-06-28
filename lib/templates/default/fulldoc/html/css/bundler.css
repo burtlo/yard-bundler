@@ -33,10 +33,18 @@ div.details { }
 div.details ul li.documentation { padding-top: 10px; }
 div.details ul li.project {}
     
-li.issue { margin-left: 15px; list-style-type: square; }
+/*li.issue { margin-left: 15px; }*/
+div.issue {
+    margin-left: 15px; 
+    background-color: #F6C9CC; border: 1px solid #ebc6ca; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+}
 li.issue span.time { font-size: 10px; }
 li.issue span.tags { font-size: 10px; text-transform:uppercase; }
 
-li.commit { margin-left: 15px; list-style-type: square; }
+/*li.commit { }*/
+div.commit {
+    margin-left: 15px; 
+    background-color: #EAF2F5; border: 1px solid #BEDCE7; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+}
 li.commit span.time { font-size: 10px; }
 li.commit span.tags { font-size: 10px; text-transform:uppercase; }

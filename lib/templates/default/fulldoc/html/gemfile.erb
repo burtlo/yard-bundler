@@ -27,26 +27,45 @@
         <li class="project"><a href="<%= h dep.project_url %>">Project</a></li>
       <% end %>
       
+      <!-- Issues -->
       
       <% if dep.issues and not dep.open_bugs.empty? %>
-        <h4>Open Issues</h4>
+        <h4><%= dep.open_bugs.length %> Open Issue<%= dep.open_bugs.length > 1 ? 's' : '' %></h4>
         <% dep.open_bugs.each do |issue| %>
-          <li class="issue">
-            <span class="time"><%= h issue.updated_at %></span>
-            <a href="<%= h issue.html_url %>"><%= h issue.title %></a>
-            <span class="tags">[<%= h issue.labels.join(', ') %>]</span>
-          </li>
+          <li class="issue"> </li>
+            <div class="issue">
+              <div style="float:left; padding-top: 12px; padding-left: 10px;">
+                <img src="<%= gravatar_image_from_id issue.gravatar_id %>" />
+              </div>
+              <div style="padding-left: 42px; padding-top: 10px;">
+                <a href="<%= h issue.html_url %>"><%= h issue.title %></a>
+                <span class="tags">[<%= h issue.labels.join(', ') %>]</span>
+                <br/>
+                <span class="time"><%= human_friendly_time issue.updated_at %></span>
+              </div>
+              <br style="clear: both;">
+            </div>
         <% end %>
         
       <% end %>
       
+      <!-- Commits -->
+      
       <% if dep.commits and not dep.commits.empty? %>
         <h4>Recent Commits</h4>
         <% dep.commits[0..4].each do |commit| %>
-        <li class="commit">
-          <span class="time"><%= h commit.committed_date %></span>
+        <li class="commit"> </li>
+        <div class="commit">
+        <div style="float:left; padding-top: 12px; padding-left: 10px;">
+          <img src="<%= gravatar_image_from_email commit.author.email %>">
+        </div>
+        <div style=" padding-left: 42px; padding-top: 10px;">
           <a href="http://github.com<%= commit.url %>"><%= h commit.message %></a>
-        </li>
+          <br/>
+          <span class="time"><%= human_friendly_time commit.committed_date %></span>
+        </div>
+        <br style="clear:both;"/>
+        </div>
         
         <% end %>
       <% end %>

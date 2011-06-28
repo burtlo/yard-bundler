@@ -72,10 +72,6 @@ module YARD::Parser::Bundler
       dependency = YARD::CodeObjects::Bundler::Dependency.new(YARD::CodeObjects::Bundler::BUNDLER_NAMESPACE,gem_name)
       dependency.version = gem_version
       
-      # Generate a link to the YARDOC
-      # @example http://rubydoc.info/gems/a_b_plugin/0.1.0/frames
-      dependency.documentation_url = "http://rubydoc.info/gems/#{gem_name}/#{gem_version}/frames"
-      
       json = ""
       mash = nil
       
