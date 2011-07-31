@@ -41,7 +41,7 @@ module YARD::Parser::Bundler
       
       # Dependencies - contains the entries in the Gemfile with their specified
       # versions.
-      
+
       #log.info bundle.dependencies
       
       # Specs - contains the entries in the Gemfile.lock with the specific versions.
@@ -54,6 +54,17 @@ module YARD::Parser::Bundler
       bundle.specs.each do |spec|
         decompose spec
       end
+      
+      # Graph Viz - Grab the visualization data that can be generated from Bundler
+      # and include that functionality into the output.
+      graph = Bundler::Graph.new(bundle)
+      
+      # Save the graph of the bundler dependencies to the doc directory
+      # 
+      # @note that this doc directory is being hard-coded and YARD likely has
+      #   an option to find the output directory
+      # 
+      graph.viz("#{working_directory}/doc/gemfile.png")
       
       # Return the working directory back to the original path
       Dir.chdir working_directory

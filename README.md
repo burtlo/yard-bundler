@@ -67,6 +67,15 @@ An example with the rake task:
     end
 
 
+Possible Feature Ideas
+-------------
+
+* Show the latest gem version
+* Show the number of version differences between the current and the latest
+* Collapse the commits and the issues
+* Allow the commits and the issues to fetch with AJAX so they can stay live
+
+
 LICENSE
 -------
 
