@@ -28,11 +28,15 @@ li.dependency h3 div.version {
     float: left; padding-left: 10px;
 }
 
+li.dependency ul.dependency-list { list-style: none; }
+/*li.dependency ul.dependency-list li { float: left; }*/
+
+
 div.details { }
 
-div.details ul li.documentation { padding-top: 10px; float: left; }
-div.details ul li.project { float: left; }
-    
+div.details ul { list-style: none; }
+div.details ul.links li { float: left; padding-top: 10px; }
+
 /*li.issue { margin-left: 15px; }*/
 div.issue {
     margin-left: 15px; 

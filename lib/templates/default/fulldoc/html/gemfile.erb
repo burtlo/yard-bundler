@@ -17,32 +17,81 @@
       <div class="name"><%= h dep.name %></div>
       <div class="version">(<a href="<%= h dep.rubygems_version_url %>"><%= h dep.version %></a>)</div>
     </h3>
-    <br/ style="clear:both;">
+    
+    <br style="clear:both;"/>
+    <!-- Dependencies -->
+    
   </li>
   <li class="details">
     <div class="details">
+      <ul class="links">
       
-      <% if dep.newer_versions == 0 %>
-        This is the latest released version.
-      <% else %>
-        There are <%= dep.newer_versions %> newer release<%= dep.newer_versions != 1 ? 's' : '' %>
-      <% end %>
+        <!-- Rubydoc -->
       
-      <ul style="list-style: none;">
-      <li class="documentation"><a href="<%= h dep.documentation_url %>">Documentation</a></li>
+        <li class="documentation"><a href="<%= h dep.yardoc_url %>">Rubydoc</a></li>
+
+        <!-- Documentation -->
+
+        <% if dep.documentation_url %>
+          <li class="documentation">&nbsp;|&nbsp;<a href="<%= h dep.documentation_url %>">Documentation</a></li>
+        <% end %>
       
+        <!-- Homepage -->
+
+        <% if dep.homepage_url %>
+          <li class="homepage">&nbsp;|&nbsp;<a href="<%= h dep.homepage_url %>">Homepage</a></li>
+        <% end %>
+
+        <!-- Project -->
+      
+        <% if dep.source_code_url %>
+          <li class="source-code">&nbsp;|&nbsp;<a href="<%= h dep.source_code_url %>">Source Code</a></li>
+        <% end %>
+
+        <!-- Bug Tracker -->
+      
+        <% if dep.bug_tracker_url %>
+          <li class="bug-tracker">&nbsp;|&nbsp;<a href="<%= h dep.bug_tracker_url %>">Bug Tracker</a></li>
+        <% end %>
+
+        <!-- Mailing List -->
+      
+        <% if dep.mailing_list_url %>
+          <li class="mailing-list">&nbsp;|&nbsp;<a href="<%= h dep.mailing_list_url %>">Mailing List</a></li>
+        <% end %>
+      
+        <!-- Wiki -->
+      
+        <% if dep.wiki_url %>
+          <li class="wiki">&nbsp;|&nbsp;<a href="<%= h dep.wiki_url %>">Wiki</a></li>
+        <% end %>
+      
+      </ul>
+      
+      <!-- More Details -->
+      
+      <ul>
+        <br style="clear:both;"/>
       <!-- Newer Versions -->
       
-      <!-- Github Project -->
-      
-      <% if dep.project_url and not dep.project_url == "" %>
-        <li class="project">&nbsp;|&nbsp;<a href="<%= h dep.project_url %>">Project</a></li>
+      <% if dep.newer_versions.length == 0 %>
+        This is the latest released version.
+      <% elsif dep.newer_versions.length == 1 %>
+        [!] There is 1 newer release. 
+        (<%= dep.versions.first.number %>)
+        <!-- Release Date -->
+        <!-- Link all the versions that are displayed. -->
+        <!-- Hide all the version information until the user clicks on the 'There is 1 newer release' -->
+      <% else %>
+        [!] There are <%= dep.newer_versions.length %> newer releases.
+        (<%= dep.newer_versions.map {|version| version.number }.join(", ") %>)
+        <!-- Release Date -->
+        <!-- Link all the versions that are displayed. -->
+        <!-- Hide all the version information until the user clicks on the 'There is 1 newer release' -->
       <% end %>
       
-      <!-- Issues -->
-      
-      <br style="clear"/>
-      
+      <!-- Collapsed Version: Show the number of open issues -->
+      <!-- Issues when expanded -->
       
       <% if dep.issues and not dep.open_bugs.empty? %>
         <h4><%= dep.open_bugs.length %> Open Issue<%= dep.open_bugs.length > 1 ? 's' : '' %></h4>
@@ -63,8 +112,9 @@
         <% end %>
         
       <% end %>
-      
-      <!-- Commits -->
+
+      <!-- Collapsed Version: Show the date/time of the recent commit -->
+      <!-- Commits when expanded -->
       
       <% if dep.commits and not dep.commits.empty? %>
         <h4>Recent Commits</h4>

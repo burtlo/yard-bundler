@@ -46,6 +46,7 @@ module YARD::Parser::Bundler
       gem_version = gem_specification.version.to_s
       
       dependency = YARD::CodeObjects::Bundler::Dependency.new(YARD::CodeObjects::Bundler::BUNDLER_NAMESPACE,gem_name)
+      
       dependency.version = gem_version
       
       # Rubygems API does not have a way to ask for detailed information about
@@ -53,11 +54,17 @@ module YARD::Parser::Bundler
 
       # Generate a Rubygem, a helper class that grants us access to the RubyGems
       # API to query for information related to the Gem
-
+      
       ruby_gem = RubyGem.new(gem_name)
       
       gemspec_mash = ruby_gem.gemspec
       versions_mash = ruby_gem.versions
+      
+      # The gem specification information from Rubygems contains several fields
+      # that I should provide support for within the Dependency class simply by
+      # loading the gem specification value information into the dependency.
+      
+      dependency.gemspec = gemspec_mash
       
       # project_uri
       # - when github has been specified, retrieve additional information
@@ -66,8 +73,8 @@ module YARD::Parser::Bundler
       
       if gemspec_mash and user_repo = gemspec_mash.source_code_uri.to_s[/^http:\/\/github.com\/(.+)/,1]
         
-        log.debug "Setting Project URL: #{gemspec_mash.source_code_uri}"
-        dependency.project_url = gemspec_mash.source_code_uri
+        #log.debug "Setting Project URL: #{gemspec_mash.source_code_uri}"
+        #dependency.project_url = gemspec_mash.source_code_uri
         
         log.debug "Loading Github Repo: #{user_repo}"
         github_repo = Octokit.repo(user_repo)
@@ -87,7 +94,6 @@ module YARD::Parser::Bundler
       # stackoverflow - last few tagged topics that match the gem
       # TODO: change to use search text and perhaps not just tags
       # StackExchange::StackOverflow::Question.find_by_tags gem_name
-      # 
       
     end
     
