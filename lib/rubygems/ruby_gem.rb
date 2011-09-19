@@ -38,6 +38,7 @@ module YARD::Parser::Bundler
       
     rescue => exception
       log.error "could not load the rubygems information for #{@name} => #{exception}"
+      return Hashie::Mash.new
     end
 
     #
@@ -60,6 +61,7 @@ module YARD::Parser::Bundler
       
     rescue => exception
       log.error "could not load the rubygems information for #{@name} => #{exception}"
+      return Hashie::Mash.new
     end
 
   
