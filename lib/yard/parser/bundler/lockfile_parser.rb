@@ -48,9 +48,6 @@ module YARD::Parser::Bundler
       dependency = YARD::CodeObjects::Bundler::Dependency.new(YARD::CodeObjects::Bundler::BUNDLER_NAMESPACE,gem_name)
       dependency.version = gem_version
       
-      gemspec_mash = nil
-      versions_mash = nil
-      
       # Rubygems API does not have a way to ask for detailed information about
       # a particular version of a gem so you have to grab the latest.
 
