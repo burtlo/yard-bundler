@@ -1,47 +1,25 @@
 
 module YARD::Parser::Bundler
   
-  class GemfileParser < YARD::Parser::Base
+  class LockfileParser < YARD::Parser::Base
     
     def initialize(source, file = '(stdin)')
-      log.info "GemfileParser#initialize #{file}"
+      log.info "LockfileParser#initialize #{file}"
       @source = source
       @file = file
     end
     
     #
-    # Parser the output of Rspec documentation output.
+    # Parser the output of the Gemfile Lock file.
     # 
     def parse
+      log.info "Gemfile Lock - Bundler: #{@file}"
       
-      # TODO: Because the Gemfile parser will look at any file without a suffix
-      # it is important to make sure that the filename is actually Gemfile
+      # The source of the lock file is easily parsed with the Bundler::LockfileParser
+      # which will find all all our information related to the installation for
+      # us.
       
-      gemfile = File.basename(@file)
-      
-      log.info "Gemfile - Bundler: #{gemfile}"
-      
-      # TODO: Find the lock file that may be associated with the Gemfile
-      
-      # Use Bundler's DSL evaluator to generate the domain objects
-      # bundle = Bundler::Dsl.new
-      # bundle.instance_eval(@source, @file, 1)
-      
-      lock = Bundler::LockfileParser.new(@source)
-      
-      lock
-
-      # Bundler::Dsl does grant access to the instance variables so we will 
-      # add attribute readers to allow us to read the following attributes.
-
-      # class << bundle
-      #   attr_reader :rubygems_source, :sources, :dependencies, :groups, :platforms
-      # end
-      
-      # DEBUG
-      
-      # Dependencies - contains the entries in the Gemfile with their specified
-      # versions.
+      lockfile = Bundler::LockfileParser.new(@source)
 
       #log.info bundle.dependencies
       
@@ -52,20 +30,9 @@ module YARD::Parser::Bundler
       # For all the specs, we want to capture the project information and
       # add it to the the dependency
       
-      # bundle.specs.each do |spec|
-      #   decompose spec
-      # end
-      
-      # Graph Viz - Grab the visualization data that can be generated from Bundler
-      # and include that functionality into the output.
-      #graph = Bundler::Graph.new(bundle)
-      
-      # Save the graph of the bundler dependencies to the doc directory
-      # 
-      # @note that this doc directory is being hard-coded and YARD likely has
-      #   an option to find the output directory
-      # 
-      #graph.viz("#{working_directory}/doc/gemfile.png")
+      lockfile.specs.each do |spec|
+        decompose spec
+      end
       
     end
     
@@ -145,5 +112,6 @@ module YARD::Parser::Bundler
     
   end
   
-  # YARD::Parser::SourceParser.register_parser_type :gemfile, GemfileParser, ''
+  
+  YARD::Parser::SourceParser.register_parser_type :lockfile, LockfileParser, 'lock'
 end

@@ -1,8 +1,19 @@
+require 'bundler'
+require 'hashie'
+require 'open-uri'
+require 'octokit'
+require 'json'
+# This is for Stack Overflow and will be implementated later
+#require 'pilha'
+
 module BundlerInTheYARD
   VERSION = '0.0.1' unless defined?(BundlerInTheYARD::VERSION)
 end
 
+
+require File.dirname(__FILE__) + "/rubygems/ruby_gem"
 require File.dirname(__FILE__) + "/yard/parser/bundler/gemfile_parser"
+require File.dirname(__FILE__) + "/yard/parser/bundler/lockfile_parser"
 require File.dirname(__FILE__) + "/yard/code_objects/bundler/gemfile"
 
 if RUBY19
