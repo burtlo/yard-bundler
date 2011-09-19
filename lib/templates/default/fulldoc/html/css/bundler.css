@@ -30,8 +30,8 @@ li.dependency h3 div.version {
 
 div.details { }
 
-div.details ul li.documentation { padding-top: 10px; }
-div.details ul li.project {}
+div.details ul li.documentation { padding-top: 10px; float: left; }
+div.details ul li.project { float: left; }
     
 /*li.issue { margin-left: 15px; }*/
 div.issue {

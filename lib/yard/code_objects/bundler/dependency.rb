@@ -18,7 +18,7 @@ module YARD::CodeObjects
       # @return [Integer] the number of newer versions than this dependency
       # 
       def newer_versions
-        versions.index(versions.find {|a_version| version == version})
+        versions.index(versions.find {|a_version| a_version.number == version})
       end
       
       # 
