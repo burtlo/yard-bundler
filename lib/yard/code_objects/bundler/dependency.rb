@@ -14,6 +14,13 @@ module YARD::CodeObjects
       # 
       attr_accessor :versions
       
+      #
+      # @return [Integer] the number of newer versions than this dependency
+      # 
+      def newer_versions
+        versions.index(versions.find {|a_version| version == version})
+      end
+      
       # 
       # For the dependency generate the link to the documentation.
       # @return [String] url to the docs on Rubydoc
@@ -56,6 +63,13 @@ module YARD::CodeObjects
       # 
       attr_accessor :commits
       
+      def commits
+        @commits ||= []
+      end
+      
+      def last_commit_date
+        commits.first.committed_date
+      end
       
     end
     
