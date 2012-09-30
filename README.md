@@ -25,11 +25,6 @@ generated with the yard-bundler plugin.
 
 **4. Gems with Github projects will have a direct link to Github.
 
-**5. Gems on Github with issues that are 'open' and marked as 'bug' will appear
-
-**6. Gems on Github will show that last commits to the gem
-
-
 Installation
 ------------
 
@@ -52,11 +47,6 @@ as a plugin. To enable automatic loading yard-cucumber.
 
 2. Run `yardoc`, use the rake task, or run `yard server`, as would [normally](https://github.com/lsegal/yard).
 
-Be sure to update any file patterns so that they do not exclude `feature`
-files. yard-cucumber will even process your step definitions and transforms.
-
-    $ yardoc 'lib/**/*.rb' 'spec/**/*_spec.rb'
-
 An example with the rake task:
 
     require 'yard'
@@ -72,9 +62,6 @@ Possible Feature Ideas
 
 * Show the latest gem version
 * Show the number of version differences between the current and the latest
-* Collapse the commits and the issues
-* Allow the commits and the issues to fetch with AJAX so they can stay live
-
 
 LICENSE
 -------
