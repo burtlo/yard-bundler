@@ -53,18 +53,17 @@ module YARD::Parser::Bundler
     #     curl https://rubygems.org/api/v1/versions/coulda.json
     # 
     def versions
-    
+
       open "http://rubygems.org/api/v1/versions/#{@name}.json" do |response|
         json = JSON.parse(response.read)
         versions_mash = json.map {|version| Hashie::Mash.new version }
       end
-      
+
     rescue => exception
       log.error "could not load the rubygems information for #{@name} => #{exception}"
       return Hashie::Mash.new
     end
 
-  
   end
   
 end

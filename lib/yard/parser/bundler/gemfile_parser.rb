@@ -35,18 +35,14 @@ module YARD::Parser::Bundler
     end
     
     #
-    # Default YARD Parser methods
-    # 
-    def tokenize
-      
-    end
+    # Default YARD Parser methods that are not needed for processing.
+    #
+    def tokenize ; end
     
     #
-    # Default YARD Parser methods
-    # 
-    def enumerator
-      
-    end
+    # Default YARD Parser methods that are not needed for processing.
+    #
+    def enumerator ; end
     
   end
   

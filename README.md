@@ -2,25 +2,25 @@ YARD-Bundler: A YARD extension for Bundler
 =========================================
 
 NOTE: This extension is currently under development. At the current moment,
-the plugin is not fully featured or compliant with all of Bundler and Gemfile features. 
+the plugin is not fully featured or compliant with all of Bundler and Gemfile features.
 However, please feel free to fork the project and take a look around.
 
 Synopsis
 --------
 
-YARD-Bundler is a YARD extension that processes Bundler Gemfile and Gemfile.lock 
+YARD-Bundler is a YARD extension that processes Bundler Gemfile and Gemfile.lock
 files and includes them in the documentation output.
 
 Features (Example)
 --------
 
-Take a look at [example output](http://recursivegames.com/yard-bundler/file.Gemfile.html) 
+Take a look at [example output](http://recursivegames.com/yard-bundler/file.Gemfile.html)
 generated with the yard-bundler plugin.
 
 **1. Gemfile.lock and Gemfile are parsed and [included in your file list](http://recursivegames.com/yard-bundler/file_list.html).
 
 **2. Gemfile formatted with all dependencies shown in a [TOC](http://recursivegames.com/yard-bundler/file.Gemfile.html).
- 
+
 **3. Gem description contains direct links to [documentation](http://rubydoc.info) and [rubygem's description](http://rubygems.org)
 
 **4. Gems with Github projects will have a direct link to Github.
@@ -43,8 +43,8 @@ Installation
 Usage
 -----
 
-YARD supports for automatically including gems with the prefix `yard-` 
-as a plugin. To enable automatic loading yard-cucumber. 
+YARD supports for automatically including gems with the prefix `yard-`
+as a plugin. To enable automatic loading yard-cucumber.
 
 1. Edit `~/.yard/config` and insert the following line:
 
@@ -52,7 +52,7 @@ as a plugin. To enable automatic loading yard-cucumber.
 
 2. Run `yardoc`, use the rake task, or run `yard server`, as would [normally](https://github.com/lsegal/yard).
 
-Be sure to update any file patterns so that they do not exclude `feature` 
+Be sure to update any file patterns so that they do not exclude `feature`
 files. yard-cucumber will even process your step definitions and transforms.
 
     $ yardoc 'lib/**/*.rb' 'spec/**/*_spec.rb'

@@ -5,10 +5,9 @@
 <div>
   Provided below is a list of the files defined in the Gemfile and Gemfile.lock.
   All of the dependencies and sub-dependencies are shown here with links to their
-  documentation and if it the project is hosted on Github additional links are 
-  included to the project, issues, and recent commits.
+  documentation and if it the project is hosted on Github additional links are
+  included to the project and issues.
 </div>
-<!-- <img src="gemfile.png" /> -->
 
 <ul class="dependencies">
 <% dependencies.each do |dep| %>
@@ -17,17 +16,17 @@
       <div class="name"><%= h dep.name %></div>
       <div class="version">(<a href="<%= h dep.rubygems_version_url %>"><%= h dep.version %></a>)</div>
     </h3>
-    
+
     <br style="clear:both;"/>
     <!-- Dependencies -->
-    
+
   </li>
   <li class="details">
     <div class="details">
       <ul class="links">
-      
+
         <!-- Rubydoc -->
-      
+
         <li class="documentation"><a href="<%= h dep.yardoc_url %>">Rubydoc</a></li>
 
         <!-- Documentation -->
@@ -35,7 +34,7 @@
         <% if dep.documentation_url %>
           <li class="documentation">&nbsp;|&nbsp;<a href="<%= h dep.documentation_url %>">Documentation</a></li>
         <% end %>
-      
+
         <!-- Homepage -->
 
         <% if dep.homepage_url %>
@@ -43,41 +42,41 @@
         <% end %>
 
         <!-- Project -->
-      
+
         <% if dep.source_code_url %>
           <li class="source-code">&nbsp;|&nbsp;<a href="<%= h dep.source_code_url %>">Source Code</a></li>
         <% end %>
 
         <!-- Bug Tracker -->
-      
+
         <% if dep.bug_tracker_url %>
           <li class="bug-tracker">&nbsp;|&nbsp;<a href="<%= h dep.bug_tracker_url %>">Bug Tracker</a></li>
         <% end %>
 
         <!-- Mailing List -->
-      
+
         <% if dep.mailing_list_url %>
           <li class="mailing-list">&nbsp;|&nbsp;<a href="<%= h dep.mailing_list_url %>">Mailing List</a></li>
         <% end %>
-      
+
         <!-- Wiki -->
-      
+
         <% if dep.wiki_url %>
           <li class="wiki">&nbsp;|&nbsp;<a href="<%= h dep.wiki_url %>">Wiki</a></li>
         <% end %>
-      
+
       </ul>
-      
+
       <!-- More Details -->
-      
+
       <ul>
         <br style="clear:both;"/>
       <!-- Newer Versions -->
-      
+
       <% if dep.newer_versions.length == 0 %>
         This is the latest released version.
       <% elsif dep.newer_versions.length == 1 %>
-        [!] There is 1 newer release. 
+        [!] There is 1 newer release.
         (<%= dep.versions.first.number %>)
         <!-- Release Date -->
         <!-- Link all the versions that are displayed. -->
@@ -89,10 +88,10 @@
         <!-- Link all the versions that are displayed. -->
         <!-- Hide all the version information until the user clicks on the 'There is 1 newer release' -->
       <% end %>
-      
+
       <!-- Collapsed Version: Show the number of open issues -->
       <!-- Issues when expanded -->
-      
+
       <% if dep.issues and not dep.open_bugs.empty? %>
         <h4><%= dep.open_bugs.length %> Open Issue<%= dep.open_bugs.length > 1 ? 's' : '' %></h4>
         <% dep.open_bugs.each do |issue| %>
@@ -110,34 +109,12 @@
               <br style="clear: both;">
             </div>
         <% end %>
-        
+
       <% end %>
 
-      <!-- Collapsed Version: Show the date/time of the recent commit -->
-      <!-- Commits when expanded -->
-      
-      <% if dep.commits and not dep.commits.empty? %>
-        <h4>Recent Commits</h4>
-        <% dep.commits[0..4].each do |commit| %>
-        <li class="commit"> </li>
-        <div class="commit">
-        <div style="float:left; padding-top: 12px; padding-left: 10px;">
-          <img src="<%= gravatar_image_from_email commit.author.email %>">
-        </div>
-        <div style=" padding-left: 42px; padding-top: 10px;">
-          <a href="http://github.com<%= commit.url %>"><%= h commit.message %></a>
-          <br/>
-          <span class="time"><%= human_friendly_time commit.committed_date %></span>
-        </div>
-        <br style="clear:both;"/>
-        </div>
-        
-        <% end %>
-      <% end %>
-      
     </ul></div>
   </li>
-  
+
 <% end %>
 </ul>
 <br/ style="clear:both;">

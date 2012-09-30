@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + "/lib/yard-bundler"
 
 module BundlerInTheYARD
   extend self
-  
+
   def show_version_changes(version)
     date = ""
-    changes = []  
+    changes = []
     grab_changes = false
 
     File.open("#{File.dirname(__FILE__)}/History.txt",'r') do |file|
@@ -32,21 +32,21 @@ Gem::Specification.new do |s|
   s.name        = 'yard-bundler'
   s.version     = ::BundlerInTheYARD::VERSION
   s.authors     = ["Franklin Webber"]
-  s.description = %{ 
+  s.description = %{
     YARD-Bundler is a YARD extension that processes Bundler Gemfiles. }
   s.summary     = "Bundler in YARD"
   s.email       = 'franklin.webber@gmail.com'
   s.homepage    = "http://github.com/burtlo/yard-bundler"
 
   s.platform    = Gem::Platform::RUBY
-  
+
   changes = BundlerInTheYARD.show_version_changes(::BundlerInTheYARD::VERSION)
-  
+
   s.post_install_message = %{
 (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##)
 
   Thank you for installing yard-bundler #{::BundlerInTheYARD::VERSION} / #{changes[:date]}.
-  
+
   Changes:
   #{changes[:changes].collect{|change| "  #{change}"}.join("")}
 (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##) (##)
@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bundler', '~> 1.0'
   s.add_dependency 'octokit', '~> 0.6'
   s.add_dependency 'hashie', '~> 1.0'
-  
+
   s.rubygems_version   = "1.3.7"
   s.files            = `git ls-files`.split("\n")
   s.extra_rdoc_files = ["README.md", "History.txt"]

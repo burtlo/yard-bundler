@@ -41,80 +41,42 @@ module YARD::Parser::Bundler
     #   version of the gem specification.
     #
     def decompose(gem_specification)
-      
+
       gem_name = gem_specification.name
       gem_version = gem_specification.version.to_s
-      
+
       dependency = YARD::CodeObjects::Bundler::Dependency.new(YARD::CodeObjects::Bundler::BUNDLER_NAMESPACE,gem_name)
-      
+
       dependency.version = gem_version
-      
+
       # Rubygems API does not have a way to ask for detailed information about
       # a particular version of a gem so you have to grab the latest.
 
       # Generate a Rubygem, a helper class that grants us access to the RubyGems
       # API to query for information related to the Gem
-      
+
       ruby_gem = RubyGem.new(gem_name)
-      
-      gemspec_mash = ruby_gem.gemspec
-      versions_mash = ruby_gem.versions
-      
+
       # The gem specification information from Rubygems contains several fields
       # that I should provide support for within the Dependency class simply by
       # loading the gem specification value information into the dependency.
-      
-      dependency.gemspec = gemspec_mash
-      
-      # project_uri
-      # - when github has been specified, retrieve additional information
-      
-      # TODO: check for github gem being installed
-      
-      if gemspec_mash and user_repo = gemspec_mash.source_code_uri.to_s[/^http:\/\/github.com\/(.+)/,1]
-        
-        #log.debug "Setting Project URL: #{gemspec_mash.source_code_uri}"
-        #dependency.project_url = gemspec_mash.source_code_uri
-        
-        log.debug "Loading Github Repo: #{user_repo}"
-        github_repo = Octokit.repo(user_repo)
-        
-        log.debug "Setting Github Issues: #{user_repo}"
-        # Retrieve the issues
-        dependency.issues = Octokit.issues(user_repo) if github_repo.has_issues
-        
-        log.debug "Setting Github Commits: #{user_repo}"
-        # Retrieve the last commits
-        dependency.commits = Octokit.commits(user_repo)
-        
-      end
-      
-      dependency.versions = versions_mash
-      
-      # stackoverflow - last few tagged topics that match the gem
-      # TODO: change to use search text and perhaps not just tags
-      # StackExchange::StackOverflow::Question.find_by_tags gem_name
-      
+
+      dependency.gemspec = ruby_gem.gemspec
+      dependency.versions = ruby_gem.versions
+
     end
-    
-    
-    
+
     #
-    # Default YARD Parser methods
-    # 
-    def tokenize
-      
-    end
-    
+    # Default YARD Parser methods that are not needed for processing.
     #
-    # Default YARD Parser methods
-    # 
-    def enumerator
-      
-    end
-    
+    def tokenize ; end
+
+    #
+    # Default YARD Parser methods that are not needed for processing.
+    #
+    def enumerator ; end
+
   end
-  
-  
+
   YARD::Parser::SourceParser.register_parser_type :lockfile, LockfileParser, 'lock'
 end
